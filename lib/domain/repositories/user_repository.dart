@@ -12,10 +12,6 @@ abstract class UserRepository {
 
   Stream<AppUser> get userStream => userStreamController.stream;
 
-  AppUser fromJson(Map data, String uid);
-
-  Map<String, dynamic> toJson(AppUser user);
-
   Future<void> getUser(String uid);
 
   Future<void> setUser(AppUser user);

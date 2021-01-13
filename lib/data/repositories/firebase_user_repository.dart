@@ -14,6 +14,7 @@ class FirebaseUserRepo extends UserRepository {
 
   @override
   Future<void> deleteUser() async {
+    //TODO reauth to delete
     try {
       await datastoreRepo.deleteDocument('users', _currentUser.uid);
       await authService.deleteUser(_currentUser.uid);
@@ -31,7 +32,7 @@ class FirebaseUserRepo extends UserRepository {
     try {
       DocumentSnapshot document = await datastoreRepo.getDocument('users', uid);
       final userData = document.data();
-      _currentUser = fromJson(userData, uid);
+      _currentUser = AppUser().fromJson(userData, uid);
       this.userStreamController.add(_currentUser);
     } on AppError catch (appError) {
       throw appError;
@@ -50,7 +51,7 @@ class FirebaseUserRepo extends UserRepository {
   Future<void> setUser(AppUser user) async {
     try {
       _currentUser = user;
-      Map<String, dynamic> rawUserData = toJson(user);
+      Map<String, dynamic> rawUserData = AppUser().toJson(user);
       await datastoreRepo.setDocument('users', user.uid, rawUserData);
       this.userStreamController.add(_currentUser);
     } on AppError catch (appError) {
@@ -105,35 +106,6 @@ class FirebaseUserRepo extends UserRepository {
     _currentUser.userName = newUserName;
     await setUser(_currentUser);
     this.userStreamController.add(_currentUser);
-  }
-
-  @override
-  AppUser fromJson(Map data, String uid) {
-    AppUser newUser = AppUser();
-    newUser.uid = uid;
-    newUser.userName = data['userName'] ?? '';
-    newUser.name = data['name'] ?? '';
-    newUser.email = data['email'];
-    newUser.birthday = data['birthday'] != null
-        ? DateTime.parse(data['birthday'])
-        : DateTime(1900, 1, 1);
-    newUser.phone = data['phone'] ?? '';
-    newUser.profilePicUrl = data['profilePicUrl'] ?? '';
-
-    return newUser;
-  }
-
-  @override
-  Map<String, dynamic> toJson(AppUser user) {
-    return {
-      'userName': user.userName,
-      'name': user.name,
-      'email': user.email,
-      'birthday':
-          user.birthday == null ? null : user.birthday.toIso8601String(),
-      'phone': user.phone,
-      'profilePicUrl': user.profilePicUrl,
-    };
   }
 
   @override

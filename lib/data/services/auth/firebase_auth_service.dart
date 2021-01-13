@@ -195,6 +195,13 @@ class FirebaseAuthService extends AuthService {
         print('The user account is disabled.');
         throw AppError.userDisabled();
         break;
+      case 'account-exists-with-different-credential':
+        print('The account exists with different credential.');
+        //TODO handle this error
+        throw AppError(
+            code: 'The account exists with different credential',
+            message: 'Try a different login method.');
+        break;
       default:
         //other errors
         print(e.code);
