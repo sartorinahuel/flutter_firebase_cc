@@ -110,9 +110,6 @@ class FirebaseAuthService extends AuthService {
     } on FirebaseAuthException catch (e) {
       throw authErrorHandler(e);
     } catch (e) {
-      print(e.code);
-      print(e.message);
-
       //Generic error
       throw AppError.genericError(
         message: 'Something went wrong during login',
@@ -158,13 +155,12 @@ class FirebaseAuthService extends AuthService {
   @override
   Future<void> sendEmailVerification() async {
     User user = firebaseAuth.currentUser;
-    await user
-        .sendEmailVerification()
-        .whenComplete(() => print('Verification email sent!'))
-        .catchError(
-          throw AppError.genericError(
-              message: 'Error sending email verification'),
-        );
+    await user.sendEmailVerification().whenComplete(() {
+      //TODO Show "Email Sent" on screen
+      print('Verification email sent!');
+    }).catchError(
+      throw AppError.genericError(message: 'Error sending email verification'),
+    );
   }
 
   @override

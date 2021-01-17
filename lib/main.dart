@@ -7,6 +7,9 @@ import 'package:flutter_firebase_cc/domain/blocs/auth/auth_bloc.dart';
 import 'package:flutter_firebase_cc/domain/blocs/user/user_bloc.dart';
 import 'package:flutter_firebase_cc/ui/pages/init_page.dart';
 
+import 'domain/entities/app_error.dart';
+import 'ui/pages/error_page.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -24,8 +27,16 @@ class MyApp extends StatelessWidget {
       home: FutureBuilder(
           future: Firebase.initializeApp(),
           builder: (context, snapshot) {
+
+            //On Firebase Error
             if (snapshot.hasError) {
-              return _FirebaseErrorPage();
+              return AuthErrorPage(
+                appError: AppError(
+                  code: 'Firebase Error',
+                  message: 'We couldn´t initialize Firebase App',
+                ),
+                onError: (){},
+              );
             }
 
             // Once complete, show your application
@@ -46,17 +57,6 @@ class MyApp extends StatelessWidget {
               ),
             );
           }),
-    );
-  }
-}
-
-class _FirebaseErrorPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('Error de Firebase'),
-      ),
     );
   }
 }

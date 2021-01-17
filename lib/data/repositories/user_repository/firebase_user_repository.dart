@@ -4,8 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter_firebase_cc/domain/entities/app_error.dart';
 import 'package:flutter_firebase_cc/domain/globals.dart';
-import '../../domain/entities/user.dart';
-import '../../domain/repositories/user_repository.dart';
+import '../../../domain/entities/user.dart';
+import '../../../domain/repositories/user_repository.dart';
 
 class FirebaseUserRepo extends UserRepository {
   AppUser _currentUser = AppUser();

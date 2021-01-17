@@ -108,4 +108,16 @@ class FirebaseCloudstoreRepository extends DatastoreRepository {
           ),
         );
   }
+
+  @override
+  Future getCollection(String route) {
+      // TODO: implement getCollection
+      throw UnimplementedError();
+    }
+  
+    @override
+    Future<void> setCollection(String route) {
+    // TODO: implement setCollection
+    throw UnimplementedError();
+  }
 }

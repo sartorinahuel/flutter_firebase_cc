@@ -69,8 +69,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     if (event is UserRegisterEvent) {
       yield UserLoadingState();
-      AppUser _currentUser = AppUser();
-      _currentUser.userName = event.userName;
+      AppUser _currentUser = AppUser();     
       _currentUser.uid = event.uid;
       _currentUser.email = event.email;
       _currentUser.name = event.name;

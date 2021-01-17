@@ -16,16 +16,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   UserBloc _userBloc;
 
   AuthBloc(BuildContext context) : super(AuthInitial()) {
+    //UserBloc to get data
     _userBloc = BlocProvider.of<UserBloc>(context);
+
+    //Listener that look if there is a session
     authService.authState().listen((uid) {
       if (uid != '') {
         this.add(AuthIsLoggedInEvent(uid));
       }
     });
+
   }
 
   @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
+    
     if (event is AuthLogInEvent) {
       yield AuthLoadingState();
       try {
@@ -36,6 +41,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } on AppError catch (e) {
         yield AuthErrorState(e);
       }
+      
     }
 
     //It comes from the persistant login or social login

@@ -1,5 +1,3 @@
-import 'package:flutter_firebase_cc/domain/entities/app_error.dart';
-
 class AppUser {
   String uid;
   String userName;
@@ -22,28 +20,27 @@ class AppUser {
   AppUser fromJson(Map data, String uid) {
     AppUser newUser = AppUser(
       uid: uid,
-      userName: data['userName'] ?? '',
-      name: data['name'] ?? '',
-      email: data['email'] ?? '',
-      birthday: data['birthday'] != null
+      userName: data['userName'],
+      name: data['name'],
+      email: data['email'],
+      birthday: data['birthday'] != ''
           ? DateTime.parse(data['birthday'])
           : DateTime(1900, 1, 1),
-      phone: data['phone'] ?? '',
-      profilePicUrl: data['profilePicUrl'] ?? '',
+      phone: data['phone'],
+      profilePicUrl: data['profilePicUrl'],
     );
 
     return newUser;
   }
 
-  Map<String, dynamic> toJson(AppUser user) {
+  Map<String, String> toJson(AppUser user) {
     return {
-      'userName': user.userName,
-      'name': user.name,
-      'email': user.email,
-      'birthday':
-          user.birthday == null ? null : user.birthday.toIso8601String(),
-      'phone': user.phone,
-      'profilePicUrl': user.profilePicUrl,
+      'userName': user.userName ?? '',
+      'name': user.name ?? '',
+      'email': user.email ?? '',
+      'birthday': user.birthday == null ? '' : user.birthday.toIso8601String(),
+      'phone': user.phone ?? '',
+      'profilePicUrl': user.profilePicUrl ?? '',
     };
   }
 }
