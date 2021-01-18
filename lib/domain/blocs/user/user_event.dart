@@ -38,3 +38,9 @@ class UserUpdateBirthdayEvent extends UserEvent {
 class UserDeleteUserEvent extends UserEvent {}
 
 class UserLogoutEvent extends UserEvent {}
+
+class UserAnonymusLoggedInEvent extends UserEvent {
+  final String uid;
+
+  UserAnonymusLoggedInEvent(this.uid);
+}

@@ -24,28 +24,44 @@ class AuthPage extends StatelessWidget {
     }
 
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Logged Out'),
-          SizedBox(
-            height: 50,
-            width: double.infinity,
+      body: SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 50,
+                width: double.infinity,
+              ),
+              Text('Logged Out'),
+              SizedBox(
+                height: 20,
+                width: double.infinity,
+              ),
+              RaisedButton(
+                onPressed: () => _registerWithUserAndPass(),
+                child: Text('Register'),
+              ),
+              SizedBox(
+                height: 20,
+                width: double.infinity,
+              ),
+              RaisedButton(
+                onPressed: () => _loginWithUserAndPass(),
+                child: Text('Login'),
+              ),
+              SizedBox(
+                height: 20,
+                width: double.infinity,
+              ),
+              RaisedButton(
+                onPressed: () => BlocProvider.of<AuthBloc>(context).add(AuthAnonymusLoginEvent()),
+                child: Text('Anonymus Login'),
+              ),
+            ],
           ),
-          RaisedButton(
-            onPressed: () => _registerWithUserAndPass(),
-            child: Text('Register'),
-          ),
-          SizedBox(
-            height: 50,
-            width: double.infinity,
-          ),
-          RaisedButton(
-            onPressed: () => _loginWithUserAndPass(),
-            child: Text('Login'),
-          ),
-        ],
+        ),
       ),
     );
   }

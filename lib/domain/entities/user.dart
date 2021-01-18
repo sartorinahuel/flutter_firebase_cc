@@ -6,6 +6,7 @@ class AppUser {
   String phone;
   DateTime birthday;
   String profilePicUrl;
+  bool isAnonymus;
 
   AppUser({
     this.birthday,
@@ -15,6 +16,7 @@ class AppUser {
     this.profilePicUrl,
     this.uid,
     this.userName,
+    this.isAnonymus,
   });
 
   AppUser fromJson(Map data, String uid) {
@@ -28,6 +30,7 @@ class AppUser {
           : DateTime(1900, 1, 1),
       phone: data['phone'],
       profilePicUrl: data['profilePicUrl'],
+      isAnonymus: data['isAnonymus'],
     );
 
     return newUser;
@@ -41,6 +44,7 @@ class AppUser {
       'birthday': user.birthday == null ? '' : user.birthday.toIso8601String(),
       'phone': user.phone ?? '',
       'profilePicUrl': user.profilePicUrl ?? '',
+      'isAnonymus': user.isAnonymus.toString(),
     };
   }
 }

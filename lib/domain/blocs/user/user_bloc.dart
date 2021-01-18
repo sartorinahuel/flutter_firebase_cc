@@ -26,6 +26,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         yield UserErrorState(e);
       }
     }
+    if (event is UserGetDataEvent) {
+      AppUser _currentUser = AppUser();
+      yield UserLoadingState();
+      try {
+        await userRepo
+            .getUser(event.uid)
+            .then((_) => _currentUser = userRepo.currentUser);
+        yield UserDataState(_currentUser);
+      } on AppError catch (e) {
+        yield UserErrorState(e);
+      }
+    }
 
     if (event is UserUpdatePhoneEvent) {
       yield UserLoadingState();
@@ -61,10 +73,22 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         yield UserInitial();
       }
     }
+
     if (event is UserLogoutEvent) {
       yield UserLoadingState();
       await userRepo.logoutUser();
       yield UserInitial();
+    }
+
+    if (event is UserAnonymusLoggedInEvent) {
+      yield UserLoadingState();
+      AppUser anonUser = AppUser(
+        name: 'John Doe',
+        uid: event.uid,
+        isAnonymus: true,
+      );
+      await userRepo.setUser(anonUser);
+       yield UserDataState(anonUser);
     }
 
     if (event is UserRegisterEvent) {

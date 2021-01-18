@@ -25,12 +25,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         this.add(AuthIsLoggedInEvent(uid));
       }
     });
-
   }
 
   @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
-    
     if (event is AuthLogInEvent) {
       yield AuthLoadingState();
       try {
@@ -41,7 +39,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } on AppError catch (e) {
         yield AuthErrorState(e);
       }
-      
     }
 
     //It comes from the persistant login or social login
@@ -49,6 +46,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       yield AuthLoadingState();
       _userBloc.add(UserGetDataEvent(event.uid));
       yield AuthLoggedInState();
+    }
+
+    //Anonymus login
+    if (event is AuthAnonymusLoginEvent) {
+      yield AuthLoadingState();
+      try {
+        String uid = await authService.anonymusSignIn();
+        print('Sign in with anonymus user with id: $uid');
+        _userBloc.add(UserAnonymusLoggedInEvent(uid));
+        yield AuthLoggedInState();
+      } on AppError catch (e) {
+        yield AuthErrorState(e);
+      }
     }
 
     if (event is AuthLogOutEvent) {

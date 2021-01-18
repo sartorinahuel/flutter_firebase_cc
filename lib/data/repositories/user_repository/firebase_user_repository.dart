@@ -49,15 +49,20 @@ class FirebaseUserRepo extends UserRepository {
 
   @override
   Future<void> setUser(AppUser user) async {
-    try {
+    if (user.isAnonymus) {
       _currentUser = user;
-      Map<String, dynamic> rawUserData = AppUser().toJson(user);
-      await datastoreRepo.setDocument('users', user.uid, rawUserData);
       this.userStreamController.add(_currentUser);
-    } on AppError catch (appError) {
-      throw appError;
-    } catch (e) {
-      throw AppError(code: 'Set User Data Error', message: e.toString());
+    } else {
+      try {
+        _currentUser = user;
+        Map<String, dynamic> rawUserData = AppUser().toJson(user);
+        await datastoreRepo.setDocument('users', user.uid, rawUserData);
+        this.userStreamController.add(_currentUser);
+      } on AppError catch (appError) {
+        throw appError;
+      } catch (e) {
+        throw AppError(code: 'Set User Data Error', message: e.toString());
+      }
     }
   }
 

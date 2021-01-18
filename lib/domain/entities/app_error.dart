@@ -10,19 +10,6 @@ class AppError extends Error {
       message: 'Check your internet connection!',
     );
     //TODO translation
-    // switch (language) {
-    //   case 'eng':
-    //     appError = AppError(
-    //       code: 'No Conectivity',
-    //       message: 'Check your internet connection!',
-    //     );
-    //     break;
-    //   default:
-    //     appError = AppError(
-    //       code: 'No Conectivity',
-    //       message: 'Check your internet connection!',
-    //     );
-    // }
     return appError;
   }
 
