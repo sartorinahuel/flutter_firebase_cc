@@ -23,24 +23,38 @@ class HomePage extends StatelessWidget {
           appBar: AppBar(
             title: Text('Flutter Firebase CC'),
           ),
-          body: Center(
+          body: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                SizedBox(height: 25, width: double.infinity),
                 Text(
                   'You email is: ${currentUser.email}',
                 ),
+                SizedBox(height: 10),
                 Text(
-                  'You email is: ${currentUser.name}',
+                  'You name is: ${currentUser.name}',
                 ),
+                SizedBox(height: 10),
                 Text(
-                  'You email is: ${currentUser.userName}',
+                  'You userName is: ${currentUser.userName}',
                 ),
+                SizedBox(height: 10),
                 Text(
-                  'You email is: ${currentUser.birthday}',
+                  'You birthday is: ${currentUser.birthday}',
                 ),
+                SizedBox(height: 10),
+                RaisedButton(
+                  onPressed: () {
+                    BlocProvider.of<UserBloc>(context)
+                        .add(UserUpdateBirthdayEvent(DateTime(1990, 11, 11)));
+                  },
+                  child: Text('Change Birthday'),
+                ),
+                SizedBox(height: 10),
                 Text(
-                  'You email is: ${currentUser.phone}',
+                  'You phone is: ${currentUser.phone}',
                 ),
                 SizedBox(height: 15),
                 RaisedButton(
@@ -54,19 +68,19 @@ class HomePage extends StatelessWidget {
                 RaisedButton(
                   onPressed: () {
                     BlocProvider.of<UserBloc>(context)
-                        .add(UserUpdateBirthdayEvent(DateTime(1990, 11, 11)));
-                  },
-                  child: Text('Change Birthday'),
-                ),
-                SizedBox(height: 15),
-                RaisedButton(
-                  onPressed: () {
-                    BlocProvider.of<UserBloc>(context)
                         .add(UserGetDataEvent(currentUser.uid));
                   },
                   child: Text('Refresh User Data'),
                 ),
                 SizedBox(height: 15),
+                RaisedButton(
+                  onPressed: () {
+                    BlocProvider.of<UserBloc>(context)
+                        .add(UserChangePasswordEvent('43214321'));
+                  },
+                  child: Text('Change Password'),
+                ),
+                SizedBox(height: 50),
                 RaisedButton(
                   onPressed: () {
                     BlocProvider.of<AuthBloc>(context).add(AuthLogOutEvent());

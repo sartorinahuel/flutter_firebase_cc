@@ -26,14 +26,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         yield UserErrorState(e);
       }
     }
-    if (event is UserGetDataEvent) {
-      AppUser _currentUser = AppUser();
+    if (event is UserChangePasswordEvent) {
       yield UserLoadingState();
       try {
-        await userRepo
-            .getUser(event.uid)
-            .then((_) => _currentUser = userRepo.currentUser);
-        yield UserDataState(_currentUser);
+        await authService.changePassword(event.password);
+        yield UserDataState(userRepo.currentUser);
       } on AppError catch (e) {
         yield UserErrorState(e);
       }
@@ -85,15 +82,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       AppUser anonUser = AppUser(
         name: 'John Doe',
         uid: event.uid,
-        isAnonymus: true,
       );
       await userRepo.setUser(anonUser);
-       yield UserDataState(anonUser);
+      yield UserDataState(anonUser);
     }
 
     if (event is UserRegisterEvent) {
       yield UserLoadingState();
-      AppUser _currentUser = AppUser();     
+      AppUser _currentUser = AppUser();
       _currentUser.uid = event.uid;
       _currentUser.email = event.email;
       _currentUser.name = event.name;

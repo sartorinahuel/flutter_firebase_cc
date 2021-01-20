@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_firebase_cc/domain/entities/app_error.dart';
 import '../../../domain/services/auth_service.dart';
 
@@ -28,13 +29,14 @@ class FirebaseAuthService extends AuthService {
 
   @override
   Stream<String> authState() async* {
+    uidStream.add('Loading');
     firebaseAuth.authStateChanges().listen((User user) {
       if (user == null) {
         print('The is no user logged in!');
         uidStream.add('');
       } else {
-        print('The user ${user.email} is logged in!');
-        uidStream.sink.add(user.uid);
+        print('The user ${user.uid} is logged in!');
+        uidStream.add(user.uid);
       }
     });
     yield* uidStream.stream;
@@ -43,12 +45,14 @@ class FirebaseAuthService extends AuthService {
   @override
   Future<void> changePassword(String password) {
     User user = firebaseAuth.currentUser;
-    //TODO more error handeling
-    user
-        .updatePassword(password)
-        .whenComplete(() => print('Password updated!'))
-        .catchError(throw AppError.genericError(
-            message: 'An error occur during changing password'));
+    user.updatePassword(password).whenComplete(() {
+      //TODO show popup message
+      print('Password updated!');
+    }).catchError(
+      //TODO more error handeling
+      throw AppError.genericError(
+          message: 'An error occur during changing password'),
+    );
   }
 
   @override
@@ -57,6 +61,7 @@ class FirebaseAuthService extends AuthService {
       await FirebaseAuth.instance.currentUser.delete();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
+        //TODO Handle this error
         print(
             'The user must reauthenticate before this operation can be executed.');
       }
@@ -74,9 +79,20 @@ class FirebaseAuthService extends AuthService {
   }
 
   @override
-  Future<String> doLoginWithFacebook() {
-    // TODO: implement doLoginWithFacebook
-    throw UnimplementedError();
+  Future<String> doLoginWithFacebook() async {
+    //TODO continue with implementation
+    // Trigger the sign-in flow
+    final AccessToken result = await FacebookAuth.instance.login();
+
+    // Create a credential from the access token
+    final FacebookAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(result.token);
+
+    // Once signed in, return the UserCredential
+    UserCredential userCredential = await FirebaseAuth.instance
+        .signInWithCredential(facebookAuthCredential);
+
+    return userCredential.user.uid;
   }
 
   @override
@@ -119,7 +135,6 @@ class FirebaseAuthService extends AuthService {
 
   @override
   Future<void> doLogout() async {
-    //TODO delete local user data
     await FirebaseAuth.instance.signOut();
   }
 

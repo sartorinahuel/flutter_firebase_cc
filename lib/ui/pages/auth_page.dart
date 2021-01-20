@@ -56,6 +56,18 @@ class AuthPage extends StatelessWidget {
                 width: double.infinity,
               ),
               RaisedButton(
+                color: Colors.blue[800],
+                onPressed: () {
+                  print('Missing implementation');
+                  // BlocProvider.of<AuthBloc>(context).add(AuthLoginWithFacebookEvent());
+                },
+                child: Text('Login with Facebook', style: TextStyle(color: Colors.white)),
+              ),
+              SizedBox(
+                height: 20,
+                width: double.infinity,
+              ),
+              RaisedButton(
                 onPressed: () => BlocProvider.of<AuthBloc>(context).add(AuthAnonymusLoginEvent()),
                 child: Text('Anonymus Login'),
               ),

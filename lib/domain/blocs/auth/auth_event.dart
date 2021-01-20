@@ -26,4 +26,18 @@ class AuthRegisterEvent extends AuthEvent {
 
 class AuthLogOutEvent extends AuthEvent {}
 
+class AuthLoadingEvent extends AuthEvent {}
+
+class AuthLoginWithFacebookEvent extends AuthEvent {}
+
+class AuthLoginWithGoogleEvent extends AuthEvent {}
+
+class AuthLoginWithAppleEvent extends AuthEvent {}
+
+class AuthLoginWithTwitterEvent extends AuthEvent {}
+
+class AuthLoginWithPhoneEvent extends AuthEvent {}
+
+class AuthUnauthEvent extends AuthEvent {}
+
 class AuthAnonymusLoginEvent extends AuthEvent {}

@@ -39,6 +39,12 @@ class UserDeleteUserEvent extends UserEvent {}
 
 class UserLogoutEvent extends UserEvent {}
 
+class UserChangePasswordEvent extends UserEvent {
+  final String password;
+
+  UserChangePasswordEvent(this.password);
+}
+
 class UserAnonymusLoggedInEvent extends UserEvent {
   final String uid;
 

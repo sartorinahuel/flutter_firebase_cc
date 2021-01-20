@@ -24,10 +24,11 @@ dependencies:
   flutter:
     sdk: flutter
   cloud_firestore: ^0.16.0
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.0
   firebase_auth: ^0.20.0+1
   firebase_core: ^0.7.0
   flutter_bloc: ^6.1.1
+  flutter_facebook_auth: ^2.0.0+1
   http: ^0.12.2
 
 dev_dependencies:

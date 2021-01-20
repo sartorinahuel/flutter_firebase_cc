@@ -21,14 +21,29 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     //Listener that look if there is a session
     authService.authState().listen((uid) {
+      print(uid);
+      if (uid == 'Loading') {
+        this.add(AuthLoadingEvent());
+      }
       if (uid != '') {
         this.add(AuthIsLoggedInEvent(uid));
+      }
+      if (uid == '') {
+        this.add(AuthUnauthEvent());
       }
     });
   }
 
   @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
+    if (state is AuthUnauthEvent) {
+      yield AuthInitial();
+    }
+
+    if (state is AuthLoadingEvent) {
+      yield AuthLoadingState();
+    }
+
     if (event is AuthLogInEvent) {
       yield AuthLoadingState();
       try {
@@ -67,6 +82,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await authService.doLogout();
       _userBloc.add(UserLogoutEvent());
       yield AuthLoggedOutState();
+    }
+
+    if (event is AuthLoginWithFacebookEvent) {
+      yield AuthLoadingState();
+      try {
+        String uid = await authService.doLoginWithFacebook();
+        // _userBloc.add(UserGetDataEvent(uid));
+        yield AuthLoggedInState();
+      } on AppError catch (e) {
+        yield AuthErrorState(e);
+      }
     }
 
     if (event is AuthRegisterEvent) {

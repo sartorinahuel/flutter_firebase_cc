@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter_firebase_cc/domain/entities/app_error.dart';
 import 'package:flutter_firebase_cc/domain/globals.dart';
@@ -29,27 +30,36 @@ class FirebaseUserRepo extends UserRepository {
 
   @override
   Future<void> getUser(String uid) async {
-    try {
-      DocumentSnapshot document = await datastoreRepo.getDocument('users', uid);
-      final userData = document.data();
-      _currentUser = AppUser().fromJson(userData, uid);
-      this.userStreamController.add(_currentUser);
-    } on AppError catch (appError) {
-      throw appError;
-    } on NoSuchMethodError catch (e) {
-      print(e);
-      throw AppError(
-        code: 'Can not read user data',
-        message: 'No Such Method Error',
+    if (FirebaseAuth.instance.currentUser.isAnonymous) {
+      _currentUser = AppUser(
+        name: 'John Doe',
+        uid: uid,
       );
-    } catch (e) {
-      throw AppError(code: 'Get User Data Error', message: e.toString());
+      this.userStreamController.add(_currentUser);
+    } else {
+      try {
+        DocumentSnapshot document =
+            await datastoreRepo.getDocument('users', uid);
+        final userData = document.data();
+        _currentUser = AppUser().fromJson(userData, uid);
+        this.userStreamController.add(_currentUser);
+      } on AppError catch (appError) {
+        throw appError;
+      } on NoSuchMethodError catch (e) {
+        print(e);
+        throw AppError(
+          code: 'Can not read user data',
+          message: 'No Such Method Error',
+        );
+      } catch (e) {
+        throw AppError(code: 'Get User Data Error', message: e.toString());
+      }
     }
   }
 
   @override
   Future<void> setUser(AppUser user) async {
-    if (user.isAnonymus) {
+    if (FirebaseAuth.instance.currentUser.isAnonymous) {
       _currentUser = user;
       this.userStreamController.add(_currentUser);
     } else {
