@@ -87,7 +87,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (event is AuthLoginWithFacebookEvent) {
       yield AuthLoadingState();
       try {
-        String uid = await authService.doLoginWithFacebook();
+        // String uid = await authService.doLoginWithFacebook();
         // _userBloc.add(UserGetDataEvent(uid));
         yield AuthLoggedInState();
       } on AppError catch (e) {
@@ -102,7 +102,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           case 'UserAndPassword':
             final String uid = await authService.doRegisterWithUserAndPassword(
                 event.user, event.pass);
-            //TODO get left user data
             _userBloc.add(
               UserRegisterEvent(
                 uid: uid,

@@ -110,13 +110,27 @@ class FirebaseCloudstoreRepository extends DatastoreRepository {
   }
 
   @override
-  Future getCollection(String route) {
-      // TODO: implement getCollection
-      throw UnimplementedError();
+  Future getCollection(String route) async {
+    try {
+      return await firestore.collection(route).get().timeout(
+        Duration(seconds: 5),
+        onTimeout: () {
+          print('Get User Data Error Timeout');
+          throw AppError.connectionTimeout();
+        },
+      );
+    } on FirebaseException catch (e) {
+      throw AppError(code: e.code, message: e.message);
+    } on AppError catch (appError) {
+      throw appError;
+    } catch (e) {
+      print(e);
+      throw e;
     }
-  
-    @override
-    Future<void> setCollection(String route) {
+  }
+
+  @override
+  Future<void> setCollection(String route) {
     // TODO: implement setCollection
     throw UnimplementedError();
   }

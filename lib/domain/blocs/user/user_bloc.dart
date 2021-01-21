@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_firebase_cc/domain/blocs/auth/auth_bloc.dart';
 import 'package:flutter_firebase_cc/domain/entities/app_error.dart';
 import 'package:flutter_firebase_cc/domain/entities/user.dart';
 import 'package:flutter_firebase_cc/domain/globals.dart';

@@ -1,3 +1,9 @@
+
+
+//TODO translation
+//TODO add onError method
+
+
 class AppError extends Error {
   String code;
   String message;
@@ -9,7 +15,6 @@ class AppError extends Error {
       code: 'No Conectivity',
       message: 'Check your internet connection!',
     );
-    //TODO translation
     return appError;
   }
 
@@ -18,7 +23,7 @@ class AppError extends Error {
       code: 'Something went Wrong',
       message: message,
     );
-    //TODO translation
+    
     return appError;
   }
 
@@ -27,7 +32,7 @@ class AppError extends Error {
       code: 'No User Found',
       message: 'No user found for that email',
     );
-    //TODO translation
+    
     return appError;
   }
 
@@ -36,7 +41,7 @@ class AppError extends Error {
       code: 'Email already in use',
       message: 'The account already exists for that email',
     );
-    //TODO translation
+    
     return appError;
   }
 
@@ -46,7 +51,7 @@ class AppError extends Error {
       message:
           'Wrong password provided for that user. Try again or recover it.',
     );
-    //TODO translation
+    
     return appError;
   }
 
@@ -55,7 +60,7 @@ class AppError extends Error {
       code: 'Week password',
       message: 'The password provided is too weak',
     );
-    //TODO translation
+    
     return appError;
   }
 
@@ -64,7 +69,7 @@ class AppError extends Error {
       code: 'User disabled',
       message: 'The user account is disabled. Please contact support.',
     );
-    //TODO translation
+    
     return appError;
   }
 
@@ -74,7 +79,7 @@ class AppError extends Error {
       message:
           'Reach timeout trying to contact server. Check internet connection.',
     );
-    //TODO translation
+    
     return appError;
   }
 }
