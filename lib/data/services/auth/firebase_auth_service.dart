@@ -78,7 +78,6 @@ class FirebaseAuthService extends AuthService {
       await FirebaseAuth.instance.currentUser.delete();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
-        //TODO Handle this error
         print(
             'The user must reauthenticate before this operation can be executed.');
       }

@@ -14,13 +14,25 @@ class FirebaseUserRepo extends UserRepository {
   AppUser get currentUser => this._currentUser;
 
   @override
-  Future<void> deleteUser() async {
-    //TODO reauth to delete
+  Future<void> deleteUser(String password) async {
     try {
+      // Create a credential
+      EmailAuthCredential credential = EmailAuthProvider.credential(
+          email: _currentUser.email, password: password);
+
+      // Reauthenticate
+      await FirebaseAuth.instance.currentUser
+          .reauthenticateWithCredential(credential);
+      //delete user data
       await datastoreRepo.deleteDocument('users', _currentUser.uid);
+
+      //delete user account
       await authService.deleteUser(_currentUser.uid);
+
+      //Clean user bloc data
       _currentUser = AppUser();
-      this.userStreamController.add(_currentUser);
+      // this.userStreamController.add(_currentUser);
+      
     } on AppError catch (appError) {
       throw appError;
     } catch (e) {

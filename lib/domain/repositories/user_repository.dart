@@ -28,7 +28,7 @@ abstract class UserRepository {
 
   Future<void> updateProfilePicUrl(String newProfilePicUrl);
 
-  Future<void> deleteUser();
+  Future<void> deleteUser(String password);
 
   Future<void> logoutUser();
 

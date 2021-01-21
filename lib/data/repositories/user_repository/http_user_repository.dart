@@ -42,7 +42,7 @@ class HttpUserRepo extends UserRepository {
   }
 
   @override
-  Future<void> deleteUser() {
+  Future<void> deleteUser(String password) {
     // TODO: implement deleteUser
     throw UnimplementedError();
   }

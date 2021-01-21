@@ -35,7 +35,11 @@ class UserUpdateBirthdayEvent extends UserEvent {
   UserUpdateBirthdayEvent(this.newBirthday);
 }
 
-class UserDeleteUserEvent extends UserEvent {}
+class UserDeleteUserEvent extends UserEvent {
+  final String password;
+
+  UserDeleteUserEvent(this.password);
+}
 
 class UserLogoutEvent extends UserEvent {}
 

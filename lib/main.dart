@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.done) {
               return MultiBlocProvider(
                 providers: [
-                  BlocProvider(create: (context) => UserBloc()),
+                  BlocProvider(create: (context) => UserBloc(context)),
                   BlocProvider(create: (context) => AuthBloc(context)),
                 ],
                 child: InitPage(),

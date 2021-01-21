@@ -7,6 +7,7 @@ import 'package:flutter_firebase_cc/domain/blocs/user/user_bloc.dart';
 import 'package:flutter_firebase_cc/domain/entities/user.dart';
 import 'package:flutter_firebase_cc/ui/pages/change_password_page.dart';
 
+import 'confirm_delete_user_page.dart';
 import 'error_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -99,7 +100,20 @@ class HomePage extends StatelessWidget {
                 SizedBox(height: 15),
                 RaisedButton(
                   color: Colors.red,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) {
+                          return BlocProvider.value(
+                            value: BlocProvider.of<UserBloc>(context),
+                            child: BlocProvider.value(
+                                value: BlocProvider.of<AuthBloc>(context),
+                                child: ConfirmDeletePage()),
+                          );
+                        },
+                      ),
+                    );
+                  },
                   child: Text(
                     'Delete User',
                     style: TextStyle(color: Colors.white),

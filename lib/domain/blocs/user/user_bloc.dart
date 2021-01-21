@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_firebase_cc/domain/blocs/auth/auth_bloc.dart';
 import 'package:flutter_firebase_cc/domain/entities/app_error.dart';
 import 'package:flutter_firebase_cc/domain/entities/user.dart';
 import 'package:flutter_firebase_cc/domain/globals.dart';
@@ -10,7 +13,7 @@ part 'user_event.dart';
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  UserBloc() : super(UserInitial());
+  UserBloc(BuildContext context) : super(UserInitial());
 
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {
@@ -26,6 +29,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         yield UserErrorState(e);
       }
     }
+
     if (event is UserChangePasswordEvent) {
       yield UserLoadingState();
       try {
@@ -60,14 +64,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     if (event is UserDeleteUserEvent) {
       yield UserLoadingState();
-      AppError appError;
-
-      await userRepo.deleteUser().catchError((error) => appError = error);
-
-      if (appError != null) {
+      AppError appError = AppError(
+        code: 'User Deleted Successfully',
+        message: '',
+      );
+      try {
+        await userRepo.deleteUser(event.password);
         yield UserErrorState(appError);
-      } else {
-        yield UserInitial();
+      } on AppError catch (appError) {
+        yield UserErrorState(appError);
       }
     }
 
