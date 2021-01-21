@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_firebase_cc/domain/blocs/auth/auth_bloc.dart';
-import 'package:flutter_firebase_cc/domain/globals.dart';
+
+import '../../domain/blocs/auth/auth_bloc.dart';
 
 class AuthPage extends StatelessWidget {
   @override

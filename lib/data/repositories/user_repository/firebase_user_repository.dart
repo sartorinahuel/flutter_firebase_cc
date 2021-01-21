@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:flutter_firebase_cc/domain/entities/app_error.dart';
-import 'package:flutter_firebase_cc/domain/globals.dart';
+import '../../../domain/entities/app_error.dart';
+import '../../../domain/globals.dart';
 import '../../../domain/entities/user.dart';
 import '../../../domain/repositories/user_repository.dart';
 

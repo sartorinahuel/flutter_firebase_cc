@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:flutter_firebase_cc/domain/entities/app_error.dart';
-import 'package:flutter_firebase_cc/domain/repositories/datastore_repository.dart';
+import '../../../domain/entities/app_error.dart';
+import '../../../domain/repositories/datastore_repository.dart';
 
 class FirebaseCloudstoreRepository extends DatastoreRepository {
   FirebaseFirestore firestore = FirebaseFirestore.instance;

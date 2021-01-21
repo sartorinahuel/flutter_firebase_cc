@@ -1,12 +1,14 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_firebase_cc/domain/entities/app_error.dart';
-import 'package:flutter_firebase_cc/domain/entities/user.dart';
-import 'package:flutter_firebase_cc/domain/globals.dart';
 import 'package:meta/meta.dart';
+
+import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../domain/entities/app_error.dart';
+import '../../../domain/entities/user.dart';
+import '../../../domain/globals.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';

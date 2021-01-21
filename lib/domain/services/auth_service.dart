@@ -1,4 +1,4 @@
-import 'package:flutter_firebase_cc/domain/entities/app_error.dart';
+import '../../domain/entities/app_error.dart';
 
 abstract class AuthService {
   Future<String> doLoginWithUserAndPassword(String user, String password);

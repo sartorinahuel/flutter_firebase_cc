@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_firebase_cc/domain/entities/user.dart';
+import '../../domain/entities/user.dart';
 
 abstract class UserRepository {
   AppUser _currentUser;

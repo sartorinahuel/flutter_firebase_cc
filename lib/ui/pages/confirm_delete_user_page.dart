@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:flutter_firebase_cc/domain/blocs/user/user_bloc.dart';
+import '../.././domain/blocs/user/user_bloc.dart';
 
 class ConfirmDeletePage extends StatelessWidget {
   @override

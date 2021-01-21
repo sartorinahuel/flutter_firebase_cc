@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_cc/domain/entities/app_error.dart';
+
+import '../.././domain/entities/app_error.dart';
 
 class AuthErrorPage extends StatelessWidget {
   final AppError appError;

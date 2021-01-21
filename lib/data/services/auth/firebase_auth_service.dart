@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:flutter_firebase_cc/domain/entities/app_error.dart';
-import 'package:flutter_firebase_cc/domain/globals.dart';
+
+import '../../../domain/entities/app_error.dart';
+import '../../../domain/globals.dart';
 import '../../../domain/services/auth_service.dart';
 
 class FirebaseAuthService extends AuthService {
