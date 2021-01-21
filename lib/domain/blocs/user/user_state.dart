@@ -7,6 +7,8 @@ class UserInitial extends UserState {}
 
 class UserLoadingState extends UserState {}
 
+class UserNeedReauthState extends UserState {}
+
 class UserErrorState extends UserState {
   final AppError appError;
 

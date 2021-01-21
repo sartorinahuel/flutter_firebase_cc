@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_firebase_cc/domain/entities/app_error.dart';
+import 'package:flutter_firebase_cc/domain/globals.dart';
 import '../../../domain/services/auth_service.dart';
 
 class FirebaseAuthService extends AuthService {
@@ -43,16 +44,25 @@ class FirebaseAuthService extends AuthService {
   }
 
   @override
-  Future<void> changePassword(String password) {
+  Future<void> changePassword(String newPassword, String oldPassword) async {
     User user = firebaseAuth.currentUser;
-    user.updatePassword(password).whenComplete(() {
-      //TODO show popup message
+    try {
+      // Create a credential
+      EmailAuthCredential credential = EmailAuthProvider.credential(
+          email: userRepo.currentUser.email, password: oldPassword);
+
+      // Reauthenticate
+      await FirebaseAuth.instance.currentUser
+          .reauthenticateWithCredential(credential);
+
+      //Change password
+      await user.updatePassword(newPassword);
+      
       print('Password updated!');
-    }).catchError(
-      //TODO more error handeling
+    } catch (e) {
       throw AppError.genericError(
-          message: 'An error occur during changing password'),
-    );
+          message: 'An error occur during changing password');
+    }
   }
 
   @override

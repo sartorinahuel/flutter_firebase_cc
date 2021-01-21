@@ -29,7 +29,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (event is UserChangePasswordEvent) {
       yield UserLoadingState();
       try {
-        await authService.changePassword(event.password);
+        await authService.changePassword(event.password, event.oldPassword);
         yield UserDataState(userRepo.currentUser);
       } on AppError catch (e) {
         yield UserErrorState(e);

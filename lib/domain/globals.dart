@@ -7,11 +7,12 @@ import 'package:flutter_firebase_cc/domain/repositories/user_repository.dart';
 import 'package:flutter_firebase_cc/domain/services/auth_service.dart';
 
 //Global variables
-//TODO delete endpoint string
-// const String endpoint =  'https://flutter-firebase-cc-default-rtdb.firebaseio.com';
+const String endpoint =  'https://flutter-firebase-cc-default-rtdb.firebaseio.com';
 
 //Dependencies
 final UserRepository userRepo = FirebaseUserRepo();
-// final UserRepository userRepo = HttpUserRepo(endpoint);
 final AuthService authService = FirebaseAuthService();
 final DatastoreRepository datastoreRepo = FirebaseCloudstoreRepository();
+
+//User current credentials
+String password = 'password';

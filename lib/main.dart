@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_firebase_cc/domain/blocs/auth/auth_bloc.dart';
 import 'package:flutter_firebase_cc/domain/blocs/user/user_bloc.dart';
 import 'package:flutter_firebase_cc/ui/pages/init_page.dart';
+import 'package:flutter_firebase_cc/ui/pages/change_password_page.dart';
 
 import 'domain/entities/app_error.dart';
 import 'ui/pages/error_page.dart';
@@ -27,7 +28,6 @@ class MyApp extends StatelessWidget {
       home: FutureBuilder(
           future: Firebase.initializeApp(),
           builder: (context, snapshot) {
-
             //On Firebase Error
             if (snapshot.hasError) {
               return AuthErrorPage(
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
                   code: 'Firebase Error',
                   message: 'We couldn´t initialize Firebase App',
                 ),
-                onError: (){},
+                onError: () {},
               );
             }
 
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.done) {
               return MultiBlocProvider(
                 providers: [
-                  BlocProvider(create: (_) => UserBloc()),
+                  BlocProvider(create: (context) => UserBloc()),
                   BlocProvider(create: (context) => AuthBloc(context)),
                 ],
                 child: InitPage(),

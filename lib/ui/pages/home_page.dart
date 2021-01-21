@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_firebase_cc/domain/blocs/auth/auth_bloc.dart';
 import 'package:flutter_firebase_cc/domain/blocs/user/user_bloc.dart';
 import 'package:flutter_firebase_cc/domain/entities/user.dart';
+import 'package:flutter_firebase_cc/ui/pages/change_password_page.dart';
 
 import 'error_page.dart';
 
@@ -75,8 +76,17 @@ class HomePage extends StatelessWidget {
                 SizedBox(height: 15),
                 RaisedButton(
                   onPressed: () {
-                    BlocProvider.of<UserBloc>(context)
-                        .add(UserChangePasswordEvent('43214321'));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return BlocProvider.value(
+                            value: UserBloc(),
+                            child: ChangePasswordPage(),
+                          );
+                        },
+                      ),
+                    );
                   },
                   child: Text('Change Password'),
                 ),

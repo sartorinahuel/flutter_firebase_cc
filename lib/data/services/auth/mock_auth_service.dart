@@ -15,7 +15,7 @@ class MockAuthService extends AuthService {
   }
 
   @override
-  Future<void> changePassword(String password) {
+  Future<void> changePassword(String password, String oldPassword) {
     // TODO: implement changePassword
     throw UnimplementedError();
   }

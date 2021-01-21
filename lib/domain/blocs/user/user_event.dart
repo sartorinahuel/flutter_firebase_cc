@@ -41,8 +41,9 @@ class UserLogoutEvent extends UserEvent {}
 
 class UserChangePasswordEvent extends UserEvent {
   final String password;
+  final String oldPassword;
 
-  UserChangePasswordEvent(this.password);
+  UserChangePasswordEvent(this.password, this.oldPassword);
 }
 
 class UserAnonymusLoggedInEvent extends UserEvent {

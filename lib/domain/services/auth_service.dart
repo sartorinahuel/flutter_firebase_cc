@@ -11,7 +11,7 @@ abstract class AuthService {
   //Email verification from current user
   Future<void> sendEmailVerification();
 
-  Future<void> changePassword(String password);
+  Future<void> changePassword(String newPassword, String oldPassword);
 
   Future<void> isPersistantSession(bool persistant);
 
