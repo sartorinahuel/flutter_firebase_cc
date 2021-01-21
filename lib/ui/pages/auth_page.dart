@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_firebase_cc/domain/blocs/auth/auth_bloc.dart';
+import 'package:flutter_firebase_cc/domain/globals.dart';
 
 class AuthPage extends StatelessWidget {
   @override
@@ -19,6 +20,9 @@ class AuthPage extends StatelessWidget {
     void _loginWithUserAndPass() {
       String user = 'sartorinahuel@gmail.com';
       String pass = '12341234';
+      if(password != 'password'){
+        pass = password;
+      }
 
       BlocProvider.of<AuthBloc>(context).add(AuthLogInEvent(user, pass));
     }

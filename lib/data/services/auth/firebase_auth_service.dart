@@ -57,8 +57,15 @@ class FirebaseAuthService extends AuthService {
 
       //Change password
       await user.updatePassword(newPassword);
-      
+      password = newPassword;
       print('Password updated!');
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      print(e.message);
+      throw AppError(
+        code: e.code,
+        message: e.message,
+      );
     } catch (e) {
       throw AppError.genericError(
           message: 'An error occur during changing password');

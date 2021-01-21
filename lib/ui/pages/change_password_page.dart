@@ -20,7 +20,6 @@ class ChangePasswordPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-           
             Padding(
               padding: const EdgeInsets.all(20),
               child: TextField(
@@ -55,6 +54,7 @@ class ChangePasswordPage extends StatelessWidget {
                       BlocProvider.of<UserBloc>(context).add(
                           UserChangePasswordEvent(_newPasswordController.text,
                               _oldPasswordController.text));
+                      password = _newPasswordController.text;
                       Navigator.pop(context);
                     }
                   },

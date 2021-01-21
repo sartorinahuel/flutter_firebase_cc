@@ -76,12 +76,11 @@ class HomePage extends StatelessWidget {
                 SizedBox(height: 15),
                 RaisedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
+                    Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) {
+                        builder: (_) {
                           return BlocProvider.value(
-                            value: UserBloc(),
+                            value: BlocProvider.of<UserBloc>(context),
                             child: ChangePasswordPage(),
                           );
                         },
@@ -100,9 +99,7 @@ class HomePage extends StatelessWidget {
                 SizedBox(height: 15),
                 RaisedButton(
                   color: Colors.red,
-                  onPressed: () {
-                    BlocProvider.of<AuthBloc>(context).add(AuthLogOutEvent());
-                  },
+                  onPressed: () {},
                   child: Text(
                     'Delete User',
                     style: TextStyle(color: Colors.white),
