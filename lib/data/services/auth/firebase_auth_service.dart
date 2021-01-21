@@ -9,22 +9,6 @@ import '../../../domain/services/auth_service.dart';
 class FirebaseAuthService extends AuthService {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  @override
-  Future<String> anonymusSignIn() async {
-    try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.signInAnonymously();
-      return userCredential.user.uid;
-    } on FirebaseAuthException catch (e) {
-      print(e.code);
-      print(e.message);
-      throw AppError(
-        code: e.code,
-        message: e.message,
-      );
-    }
-  }
-
   //returns uid if there is session
   StreamController<String> uidStream = StreamController.broadcast();
 
@@ -44,6 +28,17 @@ class FirebaseAuthService extends AuthService {
   }
 
   @override
+  Future<String> anonymusSignIn() async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInAnonymously();
+      return userCredential.user.uid;
+    } on FirebaseAuthException catch (e) {
+      throw authErrorHandler(e);
+    }
+  }
+
+  @override
   Future<void> changePassword(String newPassword, String oldPassword) async {
     User user = firebaseAuth.currentUser;
     try {
@@ -57,7 +52,6 @@ class FirebaseAuthService extends AuthService {
 
       //Change password
       await user.updatePassword(newPassword);
-      password = newPassword;
       print('Password updated!');
     } on FirebaseAuthException catch (e) {
       print(e.code);

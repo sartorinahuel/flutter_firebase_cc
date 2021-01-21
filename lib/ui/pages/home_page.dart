@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_firebase_cc/domain/blocs/auth/auth_bloc.dart';
 import 'package:flutter_firebase_cc/domain/blocs/user/user_bloc.dart';
 import 'package:flutter_firebase_cc/domain/entities/user.dart';
+import 'package:flutter_firebase_cc/domain/globals.dart';
 import 'package:flutter_firebase_cc/ui/pages/change_password_page.dart';
 
 import 'confirm_delete_user_page.dart';

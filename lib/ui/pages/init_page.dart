@@ -15,6 +15,7 @@ class InitPage extends StatelessWidget {
 
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
+        
         if (state is AuthErrorState) {
           return AuthErrorPage(
             appError: state.appError,

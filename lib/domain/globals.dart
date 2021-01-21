@@ -12,6 +12,3 @@ const String endpoint =  'https://flutter-firebase-cc-default-rtdb.firebaseio.co
 final UserRepository userRepo = FirebaseUserRepo();
 final AuthService authService = FirebaseAuthService();
 final DatastoreRepository datastoreRepo = FirebaseCloudstoreRepository();
-
-//User current credentials
-String password = 'password';

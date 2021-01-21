@@ -20,10 +20,7 @@ class AuthPage extends StatelessWidget {
     void _loginWithUserAndPass() {
       String user = 'sartorinahuel@gmail.com';
       String pass = '12341234';
-      if(password != 'password'){
-        pass = password;
-      }
-
+   
       BlocProvider.of<AuthBloc>(context).add(AuthLogInEvent(user, pass));
     }
 
