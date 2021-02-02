@@ -1,4 +1,5 @@
 # This is a generated file; do not edit or check into version control.
+<<<<<<< Updated upstream
 cloud_firestore=C:\\src\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore-0.16.0\\
 cloud_firestore_web=C:\\src\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore_web-0.3.0+1\\
 firebase_auth=C:\\src\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_auth-0.20.0+1\\
@@ -7,3 +8,13 @@ firebase_core=C:\\src\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_c
 firebase_core_web=C:\\src\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core_web-0.2.1+3\\
 flutter_facebook_auth=C:\\src\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_facebook_auth-2.0.1\\
 flutter_facebook_auth_web=C:\\src\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_facebook_auth_web-1.0.6\\
+=======
+cloud_firestore=/Users/nahuelsartori/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-0.16.0/
+cloud_firestore_web=/Users/nahuelsartori/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-0.3.0+1/
+firebase_auth=/Users/nahuelsartori/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.20.0+1/
+firebase_auth_web=/Users/nahuelsartori/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-0.3.2+6/
+firebase_core=/Users/nahuelsartori/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.7.0/
+firebase_core_web=/Users/nahuelsartori/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-0.2.1+3/
+flutter_facebook_auth=/Users/nahuelsartori/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth-2.0.1/
+flutter_facebook_auth_web=/Users/nahuelsartori/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth_web-1.0.6/
+>>>>>>> Stashed changes
